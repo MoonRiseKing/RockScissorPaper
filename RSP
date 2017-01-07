@@ -1,0 +1,66 @@
+from random import *
+from sys import exit
+
+def start(count):
+
+    i = 1
+    score = {'TM':0,'Samaritan':0}
+    while i <= count:
+	    result = play()
+	    if result > 0:
+	        score['TM'] += 1
+	    elif result == 0:
+		    pass
+	    else:
+		    score['Samaritan'] += 1
+			
+	    i += 1
+		
+    print score
+    tie = count - score['TM'] - score['Samaritan']
+    tie_rate = float(tie) / count
+    print round(tie_rate,2)
+    question()
+		
+def play():
+
+    hands = ['rock','paper','scissor']
+    T = choice(hands)
+    S = choice(hands)
+
+    if T == 'rock':
+	    if S == 'scissor':
+		    return 1
+	    elif S == T:
+		    return 0
+	    else:
+		    return -1
+			
+    elif T == 'paper':
+	    if S == 'rock':
+		    return 1
+	    elif S == T:
+		    return 0
+	    else:
+		    return -1
+			
+    else:
+	    if S == 'paper':
+		    return 1
+	    elif S == T:
+		    return 0
+	    else:
+		    return -1
+			
+			
+def question():
+
+    answer = raw_input("Do you want to play again?\n")
+    if answer == 'yes':
+	    count = int(raw_input(">"))
+	    start(count)
+    else:
+	    exit(0)
+		
+count = int(raw_input("How many time do you want to play?\n"))
+start(count)
